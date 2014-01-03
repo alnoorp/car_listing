@@ -40,7 +40,9 @@ feature 'user adds a new car', %Q{
     fill_in 'Mileage', with: 200000
     click_button 'Save Car'
 
-    expect(page).to have_content('Year must be 1980 or later')
+    within '.input.car_year' do
+      expect(page).to have_content('must be greater than or equal to 1980')
+    end
   end
 
   scenario 'optional information is specified'
