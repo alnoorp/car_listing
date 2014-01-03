@@ -18,7 +18,20 @@ feature 'user adds a new car', %Q{
   # * Upon successfully creating a car, I am redirected so that I can
   #   create another car
 
-  scenario 'required information in required format is specified'
+  scenario 'required information in required format is specified' do
+    visit root_path
+    click_link 'Add New Car'
+    fill_in 'Color', with: 'red'
+    fill_in 'Year', with: 2012
+    fill_in 'Mileage', with: 40000
+    click_button 'Save Car'
+
+    expect(page).to have_content('New car successfully added')
+    expect(page).to have_content('red')
+    expect(page).to have_content(2012)
+    expect(page).to have_content(40000)
+  end
+
   scenario 'year before 1980 is specified'
   scenario 'optional information is specified'
   scenario 'required information is not specified'
