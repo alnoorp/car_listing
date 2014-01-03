@@ -24,12 +24,14 @@ feature 'user adds a new car', %Q{
     fill_in 'Color', with: 'red'
     fill_in 'Year', with: 2012
     fill_in 'Mileage', with: 40000
+    fill_in 'Description', with: 'More than a red car'
     click_button 'Save Car'
 
     expect(page).to have_content('New car successfully added')
     expect(page).to have_content('red')
     expect(page).to have_content(2012)
     expect(page).to have_content(40000)
+    expect(page).to have_content('Add New Car')
   end
 
   scenario 'year before 1980 is specified' do
@@ -45,6 +47,21 @@ feature 'user adds a new car', %Q{
     end
   end
 
-  scenario 'optional information is specified'
-  scenario 'required information is not specified'
+  scenario 'required information is not specified' do
+    visit root_path
+    click_link 'Add New Car'
+    click_button 'Save Car'
+
+    within '.input.car_color' do
+      expect(page).to have_content "can't be blank"
+    end
+
+    within '.input.car_year' do
+      expect(page).to have_content "can't be blank"
+    end
+
+    within '.input.car_mileage' do
+      expect(page).to have_content "can't be blank"
+    end
+  end
 end
