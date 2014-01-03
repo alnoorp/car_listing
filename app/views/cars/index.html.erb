@@ -1,0 +1,11 @@
+<h1>Car Listing</h1>
+
+<%= link_to 'Add New Car', new_car_path %>
+<br />
+<br />
+<% @cars.each do |car| %>
+  <%= car.color %><br />
+  <%= car.year %><br />
+  <%= car.mileage %><br />
+  <%= car.description %><br />
+<% end %>
