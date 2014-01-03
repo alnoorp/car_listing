@@ -32,7 +32,17 @@ feature 'user adds a new car', %Q{
     expect(page).to have_content(40000)
   end
 
-  scenario 'year before 1980 is specified'
+  scenario 'year before 1980 is specified' do
+    visit root_path
+    click_link 'Add New Car'
+    fill_in 'Color', with: 'blue'
+    fill_in 'Year', with: 1979
+    fill_in 'Mileage', with: 200000
+    click_button 'Save Car'
+
+    expect(page).to have_content('Year must be 1980 or later')
+  end
+
   scenario 'optional information is specified'
   scenario 'required information is not specified'
 end
