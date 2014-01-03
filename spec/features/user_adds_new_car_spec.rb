@@ -18,4 +18,8 @@ feature 'user adds a new car', %Q{
   # * Upon successfully creating a car, I am redirected so that I can
   #   create another car
 
+  scenario 'required information in required format is specified'
+  scenario 'year before 1980 is specified'
+  scenario 'optional information is specified'
+  scenario 'required information is not specified'
 end
